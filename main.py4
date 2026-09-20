@@ -1,0 +1,20 @@
+result = []
+
+def divider(a, b):
+    if a < b:
+        raise ValueError("а менше за б")
+    if b > 100:
+        raise IndexError("б більше за 100")
+    return a / b
+
+# Заместо списка [] поставили 0, так как списки не могут быть ключами
+data = {10: 2, 2: 5, "123": 4, 18: 0, 0: 15, 8: 4}
+
+for key in data:
+    try:
+        res = divider(key, data[key])
+        result.append(res)
+    except Exception as e:
+        print(f"Виняток: {e} для ключа {key}")
+
+print("Результат:", result)
