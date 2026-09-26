@@ -1,20 +1,42 @@
-result = []
+# Перший батьківський клас
+class Weapon:
+    def __init__(self):
+        self.damage = 50  # Ексклюзивний атрибут
 
-def divider(a, b):
-    if a < b:
-        raise ValueError("а менше за б")
-    if b > 100:
-        raise IndexError("б більше за 100")
-    return a / b
+    def attack(self):     # Ексклюзивний метод
+        print(f"Атака! Нанесено {self.damage} шкоди.")
 
-# Заместо списка [] поставили 0, так как списки не могут быть ключами
-data = {10: 2, 2: 5, "123": 4, 18: 0, 0: 15, 8: 4}
 
-for key in data:
-    try:
-        res = divider(key, data[key])
-        result.append(res)
-    except Exception as e:
-        print(f"Виняток: {e} для ключа {key}")
+# Другий батьківський клас
+class Shield:
+    def __init__(self):
+        self.defense = 30  # Ексклюзивний атрибут
 
-print("Результат:", result)
+    def block(self):       # Ексклюзивний метод
+        print(f"Захист! Заблоковано {self.defense} шкоди.")
+
+
+# Дочірній клас, який успадковується одразу від двох класів
+class Hero(Weapon, Shield):
+    def __init__(self, name):
+        # Викликаємо конструктори обох батьків
+        Weapon.__init__(self)
+        Shield.__init__(self)
+        self.name = name
+
+    def show_info(self):
+        print(f"Герой: {self.name}")
+        print(f"Шкода: {self.damage}, Захист: {self.defense}")
+
+
+# Перевірка роботи
+hero = Hero("Алекс")
+
+# Виклик власного методу
+hero.show_info()
+
+# Виклик ексклюзивного методу від Weapon
+hero.attack()
+
+# Виклик ексклюзивного методу від Shield
+hero.block()
